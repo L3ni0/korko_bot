@@ -74,17 +74,8 @@ async def zmien_lekcje(ctx, member : discord.Member, lesson_id, date, time):
 @client.command()
 @commands.has_role("tutor")
 async def zmien_dane_ucznia(ctx, member : discord.Member, imie, nazwisko, numer_tel, status):
-    change_student(member, imie, nazwisko, numer_tel, status)
+    change_student(str(member), imie, nazwisko, numer_tel, status)
     await ctx.author.send(f"{member} dane zostały zmienione")
-
-
-@client.command()
-@commands.has_role("tutor")
-async def usun_ucznia(ctx, member: discord):
-    delete_student(member)
-    await ctx.author.send(f'{member} został usunięty z listy uczniów')
-
-
 
 @client.command()
 @commands.has_role("adminn")
@@ -138,14 +129,9 @@ async def policz_godziny(ctx, member : discord.Member, month=date.today().strfti
 @client.command()
 @commands.has_role("adminn")
 async def zmien_dane_nauczyciela(ctx, member : discord.Member, imie, nazwisko):
-    change_tutor(member, imie, nazwisko)
+    change_tutor(str(member), imie, nazwisko)
     await ctx.author.send(f"{member} dane zostały zmienione")
 
-@client.command()
-@commands.has_role("adminn")
-async def usun_nauczyciela(ctx, member : discord.Member):
-    delete_tutor(member)
-    await  ctx.author.send(f"{member} dane nauczyciela zostały zmienione")
 
 
 client.run(os.getenv('TOKEN'))

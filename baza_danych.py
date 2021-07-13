@@ -174,9 +174,9 @@ def change_student(st_discord, name, last_name, phone_nub, status):
             SET st_name = ?,
                 st_last_name = ?,
                 st_phone = ?,
-                st_status = ?,
+                st_status = ?
             WHERE 
-                st_id = ?
+                student_id = ?
             ''', ([name, last_name, phone_nub, status, st_discord.split('#')[1]]))
     conn.commit()
 
@@ -184,8 +184,8 @@ def change_student(st_discord, name, last_name, phone_nub, status):
 def change_tutor(tutor_discord, name, last_name):
     c.execute('''
             UPDATE tutors
-            SET st_name = ?,
-                st_last_name = ?
+            SET tutor_name = ?,
+                tutor_last_name = ?
             WHERE
                 tutor_id = ?
             ''', ([tutor_discord.split('#')[1], name, last_name]))
