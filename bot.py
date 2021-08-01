@@ -78,14 +78,35 @@ async def zmien_dane_ucznia(ctx, member : discord.Member, imie, nazwisko, numer_
     await ctx.author.send(f"{member} dane zostały zmienione")
 
 @client.command()
-@commands.has_role("adminn")
+@commands.has_permissions(administrator=True)
+async def admin_help(ctx):
+    embed = discord.Embed(title="Komendy",
+                          description="komendy tylko dla osobę która ma administratora", color=0x0088ff)
+    embed.add_field(name="..leckja nr_mieciaca ",
+                    value="pokazuje jakie lekcje odbyły się w danym miesiącu", inline=True)
+    embed.add_field(name="..dodaj_nauczyciela @osoba imie nazwisko n",
+                    value="standardowe dodanie nauczyciela", inline=True)
+    embed.add_field(name="..nauczyciele", value="zwraca listę nauczycieli wraz z danymi", inline=True)
+    embed.add_field(name="..uczniowie", value="zwraca tabelę z wszystkimi uczniami", inline=True)
+    embed.add_field(name="..policz_godziny @nauczyciel /nr_miesiaca/",
+                    value="liczy ile dana osoba przepracowała godzin + zwraca listę z sumowaną listą\n"
+                          "nr_miesiąca domyślnie jest obecnym miesiącem", inline=True)
+    embed.add_field(name="..zmien_dane_nauczyciela @nauczyciel imie nazwisko",
+                    value="zmienia dale nauczyciela", inline=True)
+    embed.add_field(name="DO DODANIA",
+                    value="mogę dodać opcle usuwania osób tylko wtedy jest problem z lekcjami\n"
+                          "bo jeśli chcemy zachować relacje to też trzeba usunąć zajęcia z tą osobą", inline=True)
+    await ctx.author.send(embed=embed, delete_after=120)
+
+@client.command()
+@commands.has_permissions(administrator=True)
 async def dodaj_nauczyciela(ctx, member : discord.Member, imie, nazwisko):
     add_tutor(imie, nazwisko, str(member))
     await ctx.author.send(f'{member}, {imie}, {nazwisko} tutor zostal dodany :D', delete_after=60)
 
 
 @client.command()
-@commands.has_role("adminn")
+@commands.has_permissions(administrator=True)
 async def lekcje(ctx, month=datetime.date.today().strftime("%m")):
     lessons = show_lessons(month)
     embed = discord.Embed()
@@ -95,7 +116,7 @@ async def lekcje(ctx, month=datetime.date.today().strftime("%m")):
 
 
 @client.command()
-@commands.has_role("adminn")
+@commands.has_permissions(administrator=True)
 async def nauczyciele(ctx):
     nauczyciele = show_tutors()
     embed = discord.Embed()
@@ -105,7 +126,7 @@ async def nauczyciele(ctx):
 
 
 @client.command()
-@commands.has_role("adminn")
+@commands.has_permissions(administrator=True)
 async def uczniowie(ctx):
     students = show_students()
     embed = discord.Embed()
@@ -115,7 +136,7 @@ async def uczniowie(ctx):
 
 
 @client.command()
-@commands.has_role("adminn")
+@commands.has_permissions(administrator=True)
 async def policz_godziny(ctx, member : discord.Member, month=date.today().strftime("%m")):
         hours = count_hours(str(member).split('#')[1], month)
         godziny = sum([float(info[3]) for info in hours])
@@ -127,11 +148,10 @@ async def policz_godziny(ctx, member : discord.Member, month=date.today().strfti
         await ctx.author.send(embed=embed)
 
 @client.command()
-@commands.has_role("adminn")
+@commands.has_permissions(administrator=True)
 async def zmien_dane_nauczyciela(ctx, member : discord.Member, imie, nazwisko):
     change_tutor(str(member), imie, nazwisko)
     await ctx.author.send(f"{member} dane zostały zmienione")
-
 
 
 client.run(os.getenv('TOKEN'))

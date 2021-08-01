@@ -49,8 +49,8 @@ def creating_tables():
                 student_id INTEGER ,
                 start_day TIME, 
                 course_duration REAL,
-                FOREIGN KEY (tutor_id) REFERENCES tutors(tutor_id),
-                FOREIGN KEY (student_id) REFERENCES students(student_id))
+                FOREIGN KEY (tutor_id) REFERENCES tutors(tutor_id) ON DELETE CASCADE ,
+                FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE )
                 """)
     conn.commit()
 
