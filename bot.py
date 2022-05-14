@@ -34,7 +34,7 @@ async def help(ctx):
 @commands.has_role("tutor")
 async def lekcja(ctx, member : discord.Member, dur=1.0, day=str(datetime.date.today())):
     add_lesson(str(ctx.author).split('#')[1],str(member).split('#')[1], dur, str(day))
-    await ctx.author.send(f'{ctx.author} rozpoczołeś lekcje z {member} na czas {dur}')
+    await ctx.author.send(f'{ctx.author} rozpocząłeś lekcje z {member} na czas {dur}')
 
 
 @client.command()
