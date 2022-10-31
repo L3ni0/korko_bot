@@ -3,7 +3,8 @@ Bot stworzony dla korepetytorów dla zarządzania lekcjami.
 Największą bolączką podczas prowadzenia zajęć jest notowanie z kim mieliśmy zajęcia (chyba że ktoś płaci z góry) dlatego korko bot zajmie się tym za nas.
 można korzystać z niego prowadząć zajęcia samemu, bądź zarządzać nim
 
-### komendy
+### komendy dostępne tylko dla korepetytora, z rodzieleniem na gównego(Admina) i pobocznych(tutor)
+odpowiedzi wyświetlają się w wiadomości prywatnej
 
 ..leckja  - pokazuje jakie lekcje odbyły się w danym miesiącu
 ..dodaj_nauczyciela - standardowe dodanie nauczyciela
